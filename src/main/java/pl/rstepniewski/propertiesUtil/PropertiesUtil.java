@@ -27,12 +27,20 @@ public class PropertiesUtil {
             PROPERTIES.load(stream);
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException().initCause(e);
-        } catch (IOException e){
-            throw new IOException(e);
         }
     }
 
-    public static String getString(String keyName){
-        return PROPERTIES.getProperty(keyName);
+    public static String getString(String key){
+        return PROPERTIES.getProperty(key);
+    }
+
+    public static Integer getInt(String key){
+        int propertyInt;
+        try{
+            propertyInt = Integer.parseInt(PROPERTIES.getProperty(key));
+        }catch (NumberFormatException e){
+            throw new NumberFormatException();
+        }
+        return propertyInt;
     }
 }
